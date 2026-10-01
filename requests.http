@@ -1,0 +1,51 @@
+### 1. Получить все занятия
+GET http://localhost:3000/lessons
+
+### 2. Фильтр по дню недели
+GET http://localhost:3000/lessons?weekday=пн
+
+### 3. Создать занятие (Успешно, 201)
+POST http://localhost:3000/lessons
+Content-Type: application/json
+
+{
+  "weekday": "вт",
+  "startTime": "10:00",
+  "endTime": "11:00"
+}
+
+### 4. Создать занятие (Ошибка валидации, 400)
+POST http://localhost:3000/lessons
+Content-Type: application/json
+
+{
+  "weekday": "понедельник",
+  "startTime": "10-00",
+  "endTime": "11:00"
+}
+
+### 5. Создать занятие (Ошибка пересечения времени, 400)
+POST http://localhost:3000/lessons
+Content-Type: application/json
+
+{
+  "weekday": "пн",
+  "startTime": "10:30",
+  "endTime": "11:00"
+}
+
+### 6. Обновить занятие целиком (PUT, 200)
+PUT http://localhost:3000/lessons/1
+Content-Type: application/json
+
+{
+  "weekday": "пн",
+  "startTime": "08:00",
+  "endTime": "09:00"
+}
+
+### 7. Удалить занятие (204)
+DELETE http://localhost:3000/lessons/5
+
+### 8. Несуществующий маршрут (404)
+GET http://localhost:3000/invalid-route
